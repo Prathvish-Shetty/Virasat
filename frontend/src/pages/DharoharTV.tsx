@@ -7,6 +7,7 @@ import { Input } from "@/components/ui/input";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Badge } from "@/components/ui/badge";
 import { Play, Eye, Search, Tv, ShieldCheck, Heart } from "lucide-react";
+import { useAuthStore } from "@/store/useAuthStore";
 
 const categories = [
   "All",
@@ -41,7 +42,7 @@ export default function DharoharTV() {
     const secs = Math.floor(seconds % 60);
     return `${mins}:${secs.toString().padStart(2, '0')}`;
   };
-
+  const {authUser} = useAuthStore()
   return (
     <div className="container mx-auto px-6 py-10 space-y-8">
       {/* Top Header */}
@@ -74,9 +75,9 @@ export default function DharoharTV() {
               className="pl-10 rounded-full bg-muted/50 focus-visible:ring-purple-500"
             />
           </div>
-          <Button onClick={() => navigate("/dharohartv/dashboard")} variant="secondary" className="rounded-full">
+          {authUser?.roles.includes("CREATOR") && <Button onClick={() => navigate("/dharohartv/dashboard")} variant="outline" className="rounded-full">
             My Studio
-          </Button>
+          </Button>}
         </div>
       </div>
 

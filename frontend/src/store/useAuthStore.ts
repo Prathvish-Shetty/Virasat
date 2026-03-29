@@ -10,8 +10,11 @@ export interface AuthUser {
   iSOnboarded: boolean;
   lastName: string;
   location: string;
-  profilePic: string;
-  role: string[];
+  profilePic: {
+    url: string;
+    mediaId: string | null;
+  };
+  roles: string[];
   status: "PENDING_APPROVAL" | string;
   updatedAt: string;
   _id: string;

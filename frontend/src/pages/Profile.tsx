@@ -36,7 +36,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/u
 import { useMediaStore } from "@/store/useMediaStore";
 import MediaUpload from "@/components/MediaUpload.tsx";
 
-const AVAILABLE_ROLES = ["USER", "EXPERT", "ADMIN", "SELLER", "CREATOR"];
+const AVAILABLE_ROLES = ["USER", "EXPERT", "SELLER", "CREATOR"];
 
 interface FullProfileEditFormProps {
     user: any;
@@ -378,7 +378,7 @@ export default function ProfilePage() {
                         <h3 className="text-xl font-semibold flex items-center border-b pb-2 mb-2"><ClipboardList className="h-5 w-5 mr-2 text-green-600" /> Status</h3>
                         <div className="space-y-3 text-sm">
                             <div className="flex items-center justify-between"><span className="font-semibold">Account Status:</span><Badge className="bg-green-100 text-green-800" variant="outline">Approved</Badge></div>
-                            <div className="flex items-center justify-between"><span className="font-semibold">Onboarding:</span><Badge variant={user.iSOnboarded ? "default" : "secondary"}>{user.iSOnboarded ? "Complete" : "Pending"}</Badge></div>
+                            <div className="flex items-center justify-between"><span className="font-semibold">Onboarding:</span><Badge  className="bg-green-100 text-green-800">{user.iSOnboarded ? "Complete" : "Pending"}</Badge></div>
                         </div>
                     </Card>
 

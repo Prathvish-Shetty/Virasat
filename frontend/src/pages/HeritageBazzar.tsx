@@ -366,6 +366,7 @@ import {
   PackageCheck,
   Store
 } from "lucide-react";
+import { useAuthStore } from "@/store/useAuthStore";
 
 const categories = [
   "All",
@@ -401,6 +402,8 @@ export default function HeritageBazzar() {
     toast.success("Added to your collection!");
   };
 
+  const { authUser } = useAuthStore()
+
   return (
     <div className="container mx-auto px-6 py-10 space-y-10">
 
@@ -431,20 +434,22 @@ export default function HeritageBazzar() {
               className="pl-10 rounded-full bg-muted/50 focus-visible:ring-emerald-500"
             />
           </div>
-          <Button onClick={() => navigate("/heritagebazzar/cart")} variant="secondary" className="rounded-full gap-2">
+          <Button onClick={() => navigate("/heritagebazzar/cart")} variant="outline" className="rounded-full gap-2">
             <ShoppingCart size={18} /> Cart
           </Button>
           <Button onClick={() => navigate("/heritagebazzar/orders")} variant="outline" className="rounded-full gap-2">
             <PackageCheck size={18} /> Orders
           </Button>
-          <Button
-            onClick={() => navigate("/heritagebazzar/dashboard")}
-            variant="secondary"
-            className="rounded-full gap-2 border border-emerald-100 hover:bg-emerald-50 transition-colors hover:dark:text-black"
-          >
-            <Store className="w-4 h-4 text-emerald-600" />
-            Seller Dashboard
-          </Button>
+          {
+            authUser?.roles.includes("SELLER") && <Button
+              onClick={() => navigate("/heritagebazzar/dashboard")}
+              variant="secondary"
+              className="rounded-full gap-2 border border-emerald-100 hover:bg-emerald-50 transition-colors hover:dark:text-black"
+            >
+              <Store className="w-4 h-4 text-emerald-600" />
+              Seller Dashboard
+            </Button>
+          }
         </div>
       </div>
 
