@@ -26,7 +26,6 @@ const reviewSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-// A unique index ensures a user can only review a product once
 reviewSchema.index({
   user: 1,
   product: 1

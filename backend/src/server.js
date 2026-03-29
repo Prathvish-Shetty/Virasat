@@ -12,6 +12,9 @@ import reviewRoutes from "./routes/review.route.js"
 import chatRoutes from "./routes/chat.route.js"
 import mediaRoutes from "./routes/media.route.js"
 import videoRoutes from "./routes/video.route.js";
+import postRoutes from "./routes/post.route.js"
+import communityRoutes from "./routes/community.route.js"
+import discussionRoutes from "./routes/discussion.route.js"
 
 const app = express();
 const PORT = process.env.PORT || 5001;
@@ -37,6 +40,9 @@ app.use("/api/reviews", reviewRoutes)
 app.use("/api/chat", chatRoutes)
 app.use("/api/media", mediaRoutes)
 app.use("/api/videos", videoRoutes);
+app.use("/api/posts", postRoutes);
+app.use("/api/communities", communityRoutes);
+app.use("/api/discussions", discussionRoutes);
 
 app.listen(PORT, () => {
   console.log(`server is running on port ${PORT}`)

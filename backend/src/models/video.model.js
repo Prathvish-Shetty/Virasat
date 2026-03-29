@@ -31,16 +31,6 @@ const videoSchema = new mongoose.Schema(
 
     category: {
       type: String,
-      // enum: [
-      //   "History",
-      //   "Mythology",
-      //   "Culture",
-      //   "Geography",
-      //   "Language",
-      //   "Festival",
-      //   "Philosophy",
-      //   "Other",
-      // ],
       required: true,
     },
 

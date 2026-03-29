@@ -4,6 +4,7 @@ import Admin from '../models/admin.model.js'
 import Expert from '../models/expert.model.js'
 import Seller from '../models/seller.model.js'
 import { cleanupMedia } from './media.controller.js';
+import Community from '../models/community.model.js';
 
 export async function getUserProfile(req, res) {
   try {
@@ -116,7 +117,7 @@ export async function updateUserProfile(req, res) {
       bio: updatedUser.bio,
       profilePic: updatedUser.profilePic,
       roles: updatedUser.roles,
-      iSOnboarded: updatedUser.iSOnboarded,
+      iSOnboarded: true,
       phoneNumber: updatedUser.phoneNumber,
       address: updatedUser.address,
       status: updatedUser.status,
@@ -158,6 +159,7 @@ export async function updateUserProfile(req, res) {
 export async function deleteUser(req, res) {
   try {
     // Assumes deletion of the currently logged-in user's account
+    await Community.deleteOne({ headId: req.user._id });
     const result = await User.deleteOne({ _id: req.user._id });
 
     if (result.deletedCount === 0) {
@@ -211,6 +213,7 @@ async function handleAdminRole(userId, details = {}) {
 }
 
 async function handleExpertRole(userId, details = {}) {
+  // 1. Handle Expert Profile Update/Creation
   let expert = await Expert.findOne({ userId });
   if (!expert) {
     expert = new Expert({ userId, ...details });
@@ -218,6 +221,18 @@ async function handleExpertRole(userId, details = {}) {
     Object.assign(expert, details);
   }
   await expert.save();
+
+  // 2. Automated Community Creation
+  // We check if a community already exists for this headId
+  const existingCommunity = await Community.findOne({ headId: userId });
+  
+  if (!existingCommunity) {
+    await Community.create({
+      headId: userId,
+      members: [userId] // Expert is the first member of their own community
+    });
+    console.log(`Community automatically created for Expert: ${userId}`);
+  }
 }
 
 async function handleSellerRole(userId, details = {}) {
