@@ -1,7 +1,7 @@
 import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
-import { Menu, Bot, Store, Users, Home, User, LogOut, Tv, ShoppingBag } from "lucide-react"
+import { Menu, Bot, Users, Home, User, LogOut, Tv, ShoppingBag } from "lucide-react"
 import { ModeToggle } from "@/components/mode-toggle"
 import { Link, NavLink } from "react-router"
 import {

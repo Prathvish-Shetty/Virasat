@@ -15,7 +15,7 @@ export async function getUserProfile(req, res) {
     if (user.roles.includes("EXPERT")) {
       const expertDetails = await Expert.findOne({ userId: user._id });
       user.expertDetails = {fieldOfExpertise: expertDetails.fieldOfExpertise, institution: expertDetails.institution, verified: expertDetails.verified};
-      console.log(user)
+      // console.log(user)
     }
 
     res.status(200).json(user);

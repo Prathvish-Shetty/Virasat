@@ -175,7 +175,7 @@ export const useVideoStore = create<VideoStore>((set, get) => ({
   try {
     const res = await axiosInstance.patch(`/videos/${videoId}/like`);
     const { isLiked } = res.data; // Backend should return if it's currently liked
-    console.log(isLiked)
+    // console.log(isLiked)
 
     set((state) => {
       if (!state.video) return state;

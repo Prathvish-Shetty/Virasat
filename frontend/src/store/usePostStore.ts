@@ -48,7 +48,7 @@ interface PostStore {
   deletePost: (postId: string) => Promise<void>;
 }
 
-export const usePostStore = create<PostStore>((set, get) => ({
+export const usePostStore = create<PostStore>((set) => ({
   posts: [],
   selectedPost: null,
   isLoading: false,

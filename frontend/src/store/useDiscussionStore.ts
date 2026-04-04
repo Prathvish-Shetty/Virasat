@@ -52,7 +52,7 @@ interface DiscussionStore {
   resolveDiscussion: (discussionId: string) => Promise<void>;
 }
 
-export const useDiscussionStore = create<DiscussionStore>((set, get) => ({
+export const useDiscussionStore = create<DiscussionStore>((set) => ({
   discussions: [],
   selectedDiscussion: null,
   isLoading: false,

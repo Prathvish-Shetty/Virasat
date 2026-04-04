@@ -38,7 +38,7 @@ export async function uploadMedia(req, res) {
   }
 }
 export async function cleanupMedia(mediaId) {
-  console.log("--- Starting Cleanup for ID:", mediaId);
+  // console.log("--- Starting Cleanup for ID:", mediaId);
 
   // Ensure we are using a valid ObjectId
   const objId = typeof mediaId === 'string' ? new mongoose.Types.ObjectId(mediaId) : mediaId;
@@ -46,11 +46,11 @@ export async function cleanupMedia(mediaId) {
   const media = await Media.findById(objId);
 
   if (!media) {
-    console.log("❌ Cleanup Failed: Media document not found in DB");
+    // console.log("❌ Cleanup Failed: Media document not found in DB");
     return false;
   }
 
-  console.log("Found Media Document. PublicID:", media.publicId);
+  // console.log("Found Media Document. PublicID:", media.publicId);
 
   try {
     const resourceType = media.type === "video" ? "video" : "image";
@@ -59,19 +59,19 @@ export async function cleanupMedia(mediaId) {
       resource_type: resourceType,
     });
 
-    console.log("Cloudinary Response:", cloudinaryResponse);
+    // console.log("Cloudinary Response:", cloudinaryResponse);
 
     if (cloudinaryResponse.result !== "ok") {
-      console.log("⚠️ Cloudinary warning: Result was not 'ok' (might already be deleted or wrong public_id)");
+      // console.log("⚠️ Cloudinary warning: Result was not 'ok' (might already be deleted or wrong public_id)");
     }
 
     // Delete from Database
     await Media.findByIdAndDelete(objId);
-    console.log("✅ Media document removed from MongoDB");
+    // console.log("✅ Media document removed from MongoDB");
     return true;
 
   } catch (error) {
-    console.error("❌ Error during Cloudinary Destroy:", error.message);
+    // console.error("❌ Error during Cloudinary Destroy:", error.message);
     throw error; // Throw so deleteProduct catches it
   }
 };

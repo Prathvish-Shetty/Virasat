@@ -7,7 +7,7 @@ import { Input } from "@/components/ui/input";
 import { Separator } from "@/components/ui/separator";
 import { Badge } from "@/components/ui/badge";
 import { Skeleton } from "@/components/ui/skeleton";
-import { Heart, Eye, Share2, MessageCircle, ArrowLeft, Maximize } from "lucide-react";
+import { Heart, Eye, Share2, MessageCircle, ArrowLeft } from "lucide-react";
 import { toast } from "sonner";
 
 export default function VideoPage() {

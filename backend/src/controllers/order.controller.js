@@ -79,7 +79,7 @@ export async function updateOrderToPaid(req, res) {
 export async function getMyOrders(req, res) {
   try {
     const orders = await Order.find({ user: req.user._id });
-    console.log(orders)
+    // console.log(orders)
     res.status(200).json(orders);
   } catch (error) {
     console.error("Error in getMyOrders:", error.message);

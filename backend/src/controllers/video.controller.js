@@ -59,7 +59,7 @@ export async function getVideoById(req, res) {
   try {
     const videoId = req.params.id;
 
-    console.log(req.user)
+    // console.log(req.user)
 
     if (!mongoose.Types.ObjectId.isValid(videoId)) {
       return res.status(400).json({ message: "Invalid Video ID" });

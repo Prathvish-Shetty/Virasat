@@ -74,7 +74,7 @@ export const useCartStore = create<CartStore>((set) => ({
     set({ isUpdating: true });
     try {
       const res = await axiosInstance.put("/cart/clear");
-      console.log(res.data)
+      // console.log(res.data)
       set({ cart: res.data.cart });
       toast.success(res.data.message || "Cart cleared");
     } catch (error: any) {

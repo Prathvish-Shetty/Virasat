@@ -56,7 +56,7 @@ export const useOrderStore = create<OrderStore>((set) => ({
     set({ isLoading: true });
     try {
       const res = await axiosInstance.get("/orders/myorders");
-      console.log(res.data)
+      // console.log(res.data)
       set({ orders: res.data });
     } catch (error: any) {
       toast.error(error.response?.data?.message || "Failed to fetch your orders");

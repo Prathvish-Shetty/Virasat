@@ -15,9 +15,12 @@ import videoRoutes from "./routes/video.route.js";
 import postRoutes from "./routes/post.route.js"
 import communityRoutes from "./routes/community.route.js"
 import discussionRoutes from "./routes/discussion.route.js"
+import path from "path"
 
 const app = express();
 const PORT = process.env.PORT || 5001;
+
+const __dirname = path.resolve()
 
 app.use(cors({
   origin: "http://localhost:5173",
@@ -26,10 +29,10 @@ app.use(cors({
 app.use(express.json())
 app.use(cookieParser())
 
-app.get("/", (req, res) => {
-  res.send("check")
-  console.log("check")
-})
+// app.get("/", (req, res) => {
+//   res.send("check")
+//   console.log("check")
+// })
 
 app.use("/api/auth", authRoutes)
 app.use("/api/users", userRoutes)
@@ -43,6 +46,13 @@ app.use("/api/videos", videoRoutes);
 app.use("/api/posts", postRoutes);
 app.use("/api/communities", communityRoutes);
 app.use("/api/discussions", discussionRoutes);
+
+if(process.env.NODE_ENV === "production"){
+  app.use(express.static(path.join(__dirname, "../frontend/dist")))
+  app.get("/{*splat}", (req, res) => {
+    res.sendFile(path.join(__dirname, "../frontend", "dist", "index.html"))
+  })
+}
 
 app.listen(PORT, () => {
   console.log(`server is running on port ${PORT}`)

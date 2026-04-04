@@ -89,8 +89,6 @@ export async function createProduct(req, res) {
       return res.status(400).json({ message: "Missing required fields" });
     }
 
-    console.log(image)
-
     const product = new Product({
       name,
       description,
@@ -131,7 +129,7 @@ export async function updateProduct(req, res) {
 
       // Only trigger cleanup if a new/different image is being provided
       if (oldMediaId && oldMediaId.toString() !== newMediaId.toString()) {
-        console.log("Replacing image. Cleaning up old media:", oldMediaId);
+        // console.log("Replacing image. Cleaning up old media:", oldMediaId);
         // Using the helper function we created earlier
         await cleanupMedia(oldMediaId);
       }
@@ -181,15 +179,10 @@ export async function deleteProduct(req, res) {
       return res.status(403).json({ message: "Not authorized" });
     }
 
-    console.log("1")
-    console.log(product)
-
     // 2. Reuse the cleanup logic
     if (product.image && product.image.mediaId) {
       await cleanupMedia(product.image.mediaId);
-      console.log(`Media ${product.image.mediaId} cleaned up.`);
-    console.log("2")
-
+      // console.log(`Media ${product.image.mediaId} cleaned up.`);
     }
 
 
