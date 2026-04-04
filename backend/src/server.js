@@ -23,7 +23,7 @@ const PORT = process.env.PORT || 5001;
 const __dirname = path.resolve()
 
 app.use(cors({
-  origin: "http://localhost:5173",
+  origin: ["http://localhost:5173", "https://virasat.onrender.com"],
   credentials: true 
 }))
 app.use(express.json())
